@@ -52,5 +52,21 @@ results = pd.read_excel(file_path)
 #top five rows from data frame
 print(results.head())
 
+# describe, selecting columns
 print(results.describe())
 
+# selected column
+print(results.columns[0])
+
+#all columns
+print(results.columns)
+
+# columns by name
+print(results['czas'])
+
+# selected row printing
+print(results.iloc[120])
+
+selected_range = results.loc[120:135]
+selected_range_details = selected_range.describe()
+print(selected_range_details)
