@@ -1,5 +1,9 @@
+from cProfile import label
+from hashlib import new
+from http import client
 from unicodedata import name
 import pandas as pd
+from traitlets import Int
 
 # lists of values
 name = ['Carol', 'Sven', 'Nicolas', 'Maria', 'Peter']
@@ -70,3 +74,50 @@ print(results.iloc[120])
 selected_range = results.loc[120:135]
 selected_range_details = selected_range.describe()
 print(selected_range_details)
+
+mask = results.loc[:,'TE28'] > 100
+
+above_hundred = pd.DataFrame(results[mask])
+print(above_hundred) 
+
+print(above_hundred['TE28'].unique())
+
+#manipulating DatFrames
+
+data = {'first':['Carl','Francis','Sam'], 
+        'last': ['Po', 'Popo', 'Smith'],
+        'age': ['22','45','55']}
+
+clients = pd.DataFrame(data)
+
+clients.rename(columns={'last':'Surname'}, inplace=True)
+'''clients.rename(index={0:'a', 1:'b', 2: 'c'}, inplace=True)
+
+clients.reset_index(inplace=True)'''
+clients.drop(columns='first', inplace=True)
+clients.drop(index=0, inplace=True)
+
+clients['new_column'] = (1,2)
+print(clients.new_column.astype(float))
+
+
+new_data = {'first':['Samantha','Oksana'],
+            'Surname':['Rankler','Maple'],
+            'age':['22', '44']}
+
+new_clients = pd.DataFrame(new_data)
+new_clients.loc[1, 'age'] = 100
+print(new_clients)
+
+data= [clients, new_clients]
+clients = pd.concat(data, ignore_index=True), 
+
+print(clients)
+
+
+
+
+
+
+
+
